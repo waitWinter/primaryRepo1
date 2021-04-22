@@ -1,0 +1,6 @@
+com\winter\authorityManagementSystem\dao\IMemberDao.class
+com\winter\authorityManagementSystem\dao\IRoleDao.class
+com\winter\authorityManagementSystem\dao\IUsersDao.class
+com\winter\authorityManagementSystem\dao\IOrdersDao.class
+com\winter\authorityManagementSystem\dao\IProductDao.class
+com\winter\authorityManagementSystem\dao\ITravellerDao.class

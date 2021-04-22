@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--开启注解扫描,管理service和dao-->
+    <context:component-scan base-package="com.winter.authorityManagementSystem.service"></context:component-scan>
+    <context:component-scan base-package="com.winter.authorityManagementSystem.dao"></context:component-scan>
+
+    <!--spring整合mybatis,核心就是spring管理sqlSessionFactory-->
+    <!--扫描数据库的配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--配置连接池-->
+    <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <!--配置分页的插件-->
+        <property name="plugins">
+            <array>
+                <!--传入插件的对象-->
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>  <!--指定分页使用哪种数据库语言-->
+                            <prop key="reasonable">true</prop>  <!--分页合理化参数-->
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--配置持久层的包路径-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.winter.authorityManagementSystem.dao"/>
+    </bean>
+
+    <!--配置spring声明式事务管理-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+
+    <!--配置事务通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置aop增强-->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.winter.authorityManagementSystem.service.impl.*ServiceImpl.*(..))"></aop:advisor>
+    </aop:config>
+</beans>

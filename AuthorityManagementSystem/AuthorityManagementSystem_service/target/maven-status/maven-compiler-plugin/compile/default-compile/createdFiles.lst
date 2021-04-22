@@ -1,0 +1,8 @@
+com\winter\authorityManagementSystem\service\impl\IProductServiceImpl.class
+com\winter\authorityManagementSystem\service\impl\IUserServiceImpl.class
+com\winter\authorityManagementSystem\service\IProductService.class
+com\winter\authorityManagementSystem\service\impl\IUsersServiceImpl.class
+com\winter\authorityManagementSystem\service\IUsersService.class
+com\winter\authorityManagementSystem\service\impl\IOrdersServiceImpl.class
+com\winter\authorityManagementSystem\service\IOrdersService.class
+com\winter\authorityManagementSystem\service\IUserService.class

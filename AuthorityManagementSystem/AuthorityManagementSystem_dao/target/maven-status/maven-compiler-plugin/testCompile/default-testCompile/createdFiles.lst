@@ -1,0 +1,6 @@
+com\winter\authorityManagementSystem\dao\test\IMemberDaoTest.class
+com\winter\authorityManagementSystem\dao\test\IOrdersDaoTest.class
+com\winter\authorityManagementSystem\dao\test\IRoleDaoTest.class
+com\winter\authorityManagementSystem\dao\test\IProductDaoTest.class
+com\winter\authorityManagementSystem\dao\test\ITravellerDaoTest.class
+com\winter\authorityManagementSystem\dao\test\IUsersDaoTest.class

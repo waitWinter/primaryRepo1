@@ -1,0 +1,7 @@
+com\winter\authorityManagementSystem\domain\Traveller.class
+com\winter\authorityManagementSystem\domain\Role.class
+com\winter\authorityManagementSystem\domain\Permission.class
+com\winter\authorityManagementSystem\domain\Orders.class
+com\winter\authorityManagementSystem\domain\Product.class
+com\winter\authorityManagementSystem\domain\Member.class
+com\winter\authorityManagementSystem\domain\Users.class
